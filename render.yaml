@@ -1,7 +1,7 @@
 services:
     - type: web
-    name: pasindu-e-shop-backend
+    name: pasindu-e-shop
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
-    healthCheckPath: /api/products
+    healthCheckPath: /
