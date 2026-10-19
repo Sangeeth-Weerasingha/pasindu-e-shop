@@ -46,14 +46,30 @@ header{padding:20px 5%;display:flex;justify-content:space-between;align-items:ce
 </div>
 </div>
 <script>
-const products=[
-{name:"AirPods Pro Dark",price:299.99,img:"https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=400",cat:"Audio"},
-{name:"MacBook Pro 16 M3",price:2499,img:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400",cat:"Laptops"},
-{name:"Mechanical Keyboard",price:129.99,img:"https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8?w=400",cat:"Accessories"},
-{name:"Nike Air Dark",price:189,img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",cat:"Shoes"},
-{name:"Sony Headset",price:199.99,img:"https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400",cat:"Audio"},
-{name:"Watch Ultra",price:399,img:"https://images.unsplash.com/photo-1555421689-3f034debb7a6?w=400",cat:"Wearables"}
+const fallbackProducts=[
+{name:"AirPods Pro Dark",price:299.99,img:"https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=500"},
+{name:"MacBook Pro 16 M3",price:2499,img:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500"},
+{name:"Mechanical Keyboard",price:129.99,img:"https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8?w=500"},
+{name:"Nike Air Dark",price:189,img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"},
+{name:"Sony Headset",price:199,img:"https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500"},
+{name:"Watch Ultra",price:399,img:"https://images.unsplash.com/photo-1555421689-3f034debb7a6?w=500"}
 ];
+
+let products = [...fallbackProducts];
+
+async function loadProducts(){
+  try{
+    const res = await fetch('http://localhost:8080/api/products');
+    if(res.ok){
+      const data = await res.json();
+      if(data.length > 0) products = data;
+    }
+  }catch(e){
+    console.log("Using fallback - backend not running");
+  }
+  // renderProducts(); // old
+loadProducts(); // new - loads from DB
+}
 let cart=[];
 function renderProducts(){
 document.getElementById('productGrid').innerHTML=products.map((p,i)=>`
