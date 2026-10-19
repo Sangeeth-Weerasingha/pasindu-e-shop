@@ -34,6 +34,12 @@ header{padding:20px 5%;display:flex;justify-content:space-between;align-items:ce
 <div class="logo">PASINDU E-SHOP 🛒</div>
 <button class="cart-btn" onclick="toggleCart()">🛒 Cart <span class="cart-count" id="cartCount">0</span></button>
 </header>
+<div style="padding:20px 5%;background:#15151f;display:flex;gap:10px;flex-wrap:wrap;">
+  <input id="pName" placeholder="Product Name" style="padding:8px;border-radius:8px;border:1px solid #24243a;background:#0a0a0f;color:#fff;">
+  <input id="pPrice" type="number" placeholder="Price" style="padding:8px;border-radius:8px;border:1px solid #24243a;background:#0a0a0f;color:#fff;width:100px;">
+  <input id="pImg" placeholder="Image URL" style="padding:8px;border-radius:8px;border:1px solid #24243a;background:#0a0a0f;color:#fff;flex:1;">
+  <button onclick="addProduct()" style="padding:8px 16px;border-radius:8px;background:#7c5cff;color:white;border:0;cursor:pointer;font-weight:700;">+ Add Product</button>
+</div>
 <div class="container">
 <div class="grid" id="productGrid"></div>
 </div>
@@ -66,10 +72,25 @@ async function loadProducts(){
     }
   }catch(e){
     console.log("Using fallback - backend not running");
-  }
+  }async function addProduct(){
+  const name = document.getElementById('pName').value;
+  const price = parseFloat(document.getElementById('pPrice').value);
+  const img = document.getElementById('pImg').value;
+  if(!name || !price || !img) return alert("Fill all fields!");
+  
+  await fetch('http://localhost:8080/api/products', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({name, price, img})
+  });
+  document.getElementById('pName').value='';
+  document.getElementById('pPrice').value='';
+  document.getElementById('pImg').value='';
+  loadProducts();
+}
   // renderProducts(); // old
 loadProducts(); // new - loads from DB
-}
+
 let cart=[];
 function renderProducts(){
 document.getElementById('productGrid').innerHTML=products.map((p,i)=>`
