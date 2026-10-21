@@ -1,3 +1,4 @@
 com\pasindu\eshop\ProductController.class
 com\pasindu\eshop\Product.class
 com\pasindu\eshop\EshopApplication.class
+com\pasindu\eshop\ProductRepository.class
