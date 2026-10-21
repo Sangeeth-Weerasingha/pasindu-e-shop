@@ -1,46 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pasindu E-Shop</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-body{background:#f8f9ff}
-header{background:white;box-shadow:0 2px 10px rgba(0,0,0,0.05);padding:15px 30px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
-.logo{font-size:24px;font-weight:800;color:#4f46e5}
-.search-cart{display:flex;gap:15px;align-items:center}
-.search-cart input{padding:10px 18px;border:1px solid #e5e7eb;border-radius:25px;width:250px;outline:none}
-.cart-btn{background:#4f46e5;color:white;padding:10px 20px;border:none;border-radius:25px;cursor:pointer;font-weight:600}
-.hero{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:white;padding:60px 30px;text-align:center}
-.hero h1{font-size:42px;margin-bottom:10px}
-.products{max-width:1200px;margin:30px auto;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
-.card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.05);transition:0.2s}
-.card:hover{transform:translateY(-5px)}
-.card img{width:100%;height:200px;object-fit:cover}
-.card-body{padding:15px}
-.price{color:#4f46e5;font-weight:800;font-size:18px}
-.card-body button{width:100%;margin-top:10px;background:#111827;color:white;border:none;padding:10px;border-radius:10px;cursor:pointer}
-#cartModal{position:fixed;top:0;right:-400px;width:380px;height:100%;background:white;box-shadow:-5px 0 20px rgba(0,0,0,0.1);transition:0.3s;z-index:200;padding:20px;overflow-y:auto}
-#cartModal.active{right:0}
-.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.3);display:none;z-index:150}
-.overlay.active{display:block}
-</style>
-</head>
-<body>
-<header>
-<div class="logo">Pasindu E-Shop</div>
-<div class="search-cart">
-<input id="search" placeholder="Search..." oninput="searchProducts()">
-<button class="cart-btn" onclick="toggleCart()">Cart <span id="cartCount" style="background:white;color:#4f46e5;padding:2px 7px;border-radius:50%">0</span></button>
-</div>
-</header>
-<div class="hero"><h1>Sri Lanka's Best E-Shop 🛒</h1><p>Free Delivery | Cash on Delivery</p></div>
-<div class="products" id="products"></div>
-<div class="overlay" id="overlay" onclick="toggleCart()"></div>
-<div id="cartModal"><h2>Your Cart</h2><div id="cartItems"></div><h3>Total: Rs. <span id="total">0</span></h3><button style="background:#4f46e5;color:white;width:100%;padding:12px;border:none;border-radius:10px;margin-top:20px" onclick="checkout()">Checkout</button></div>
-<script>
-const productsData=[{id:1,name:"iPhone 15 Pro Max",price:385000,img:"https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=500",cat:"Phones"},{id:2,name:"Samsung S24 Ultra",price:320000,img:"https://images.unsplash.com/photo-1610945265078-3858a082a4d5?w=500",cat:"Phones"},{id:3,name:"MacBook Air M2",price:285000,img:"https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500",cat:"Laptops"},{id:4,name:"Sony WH-1000XM5",price:65000,img:"https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500",cat:"Audio"},{id:5,name:"Nike Air Jordan",price:18500,img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500",cat:"Shoes"},{id:6,name:"Apple Watch Ultra",price:145000,img:"https://images.unsplash.com/photo-1555421689-d68471e189f2?w=500",cat:"Watches"}];
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pasindu E-Shop</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}body{background:#f8f9ff}header{background:white;box-shadow:0 2px 10px rgba(0,0,0,.05);padding:15px 30px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}.logo{font-size:24px;font-weight:800;color:#4f46e5}.search-cart{display:flex;gap:15px;align-items:center}.search-cart input{padding:10px 18px;border:1px solid #e5e7eb;border-radius:25px;width:250px;outline:none}.cart-btn{background:#4f46e5;color:white;padding:10px 20px;border:none;border-radius:25px;cursor:pointer;font-weight:600}.hero{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:white;padding:60px 30px;text-align:center}.hero h1{font-size:42px;margin-bottom:10px}.products{max-width:1200px;margin:30px auto;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}.card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.05);transition:.2s}.card:hover{transform:translateY(-5px)}.card img{width:100%;height:200px;object-fit:cover}.card-body{padding:15px}.price{color:#4f46e5;font-weight:800;font-size:18px}.card-body button{width:100%;margin-top:10px;background:#111827;color:white;border:none;padding:10px;border-radius:10px;cursor:pointer}#cartModal{position:fixed;top:0;right:-400px;width:380px;height:100%;background:white;box-shadow:-5px 0 20px rgba(0,0,0,.1);transition:.3s;z-index:200;padding:20px;overflow-y:auto}#cartModal.active{right:0}.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.3);display:none;z-index:150}.overlay.active{display:block}</style></head><body><header><div class="logo">Pasindu E-Shop</div><div class="search-cart"><input id="search" placeholder="Search..." oninput="searchProducts()"><button class="cart-btn" onclick="toggleCart()">Cart <span id="cartCount" style="background:white;color:#4f46e5;padding:2px 7px;border-radius:50%">0</span></button></div></header><div class="hero"><h1>Sri Lanka's Best E-Shop 🛒</h1><p>Free Delivery | Cash on Delivery</p></div><div class="products" id="products"></div><div class="overlay" id="overlay" onclick="toggleCart()"></div><div id="cartModal"><h2>Your Cart</h2><div id="cartItems"></div><h3>Total: Rs. <span id="total">0</span></h3><button style="background:#4f46e5;color:white;width:100%;padding:12px;border:none;border-radius:10px;margin-top:20px" onclick="checkout()">Checkout</button></div><script>
+const productsData=[{id:1,name:"iPhone 15 Pro Max",price:385000,img:"https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=500",cat:"Phones"},{id:2,name:"Samsung S24 Ultra",price:320000,img:"https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=500",cat:"Phones"},{id:3,name:"MacBook Air M2",price:285000,img:"https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500",cat:"Laptops"},{id:4,name:"Sony WH-1000XM5",price:65000,img:"https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500",cat:"Audio"},{id:5,name:"Nike Air Jordan",price:18500,img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500",cat:"Shoes"},{id:6,name:"Apple Watch Ultra",price:145000,img:"https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500",cat:"Watches"}];
 let cart=[],filtered=productsData;
 function renderProducts(list=filtered){document.getElementById('products').innerHTML=list.map(p=>`<div class="card"><img src="${p.img}"><div class="card-body"><h3>${p.name}</h3><div class="price">Rs. ${p.price.toLocaleString()}</div><button onclick="addToCart(${p.id})">Add to Cart</button></div></div>`).join('');}
 function searchProducts(){const q=document.getElementById('search').value.toLowerCase();filtered=productsData.filter(p=>p.name.toLowerCase().includes(q));renderProducts();}
@@ -50,6 +9,4 @@ function removeCart(i){cart.splice(i,1);updateCart();}
 function toggleCart(open){const m=document.getElementById('cartModal'),o=document.getElementById('overlay');if(open===true){m.classList.add('active');o.classList.add('active');return}m.classList.toggle('active');o.classList.toggle('active');}
 function checkout(){if(cart.length===0){alert('Cart empty!');return}alert('Order Success! Total Rs. '+document.getElementById('total').innerText);cart=[];updateCart();toggleCart();}
 renderProducts();
-</script>
-</body>
-</html>
+</script></body></html>
